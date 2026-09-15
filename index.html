@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>解锁你的成长密码</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    margin: 0; padding: 24px 16px;
+    background: linear-gradient(160deg, #eef4ff 0%, #f7f0ff 100%);
+    min-height: 100vh;
+  }
+  .card {
+    background: #fff; border-radius: 16px; padding: 24px 20px;
+    max-width: 480px; margin: 0 auto;
+    box-shadow: 0 6px 24px rgba(80, 100, 180, .12);
+  }
+  h1 { font-size: 20px; text-align: center; margin: 0 0 4px; color:#2b2b4a;}
+  .sub { text-align:center; color:#8a8aa3; font-size:13px; margin-bottom:24px;}
+  label { display:block; margin:16px 0 8px; font-weight:600; font-size:14px; color:#3a3a5c;}
+  select {
+    width:100%; padding:13px 12px; font-size:15px;
+    border:1.5px solid #dfe3f0; border-radius:10px;
+    background:#fbfcff; color:#2b2b4a; appearance:none;
+    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238a8aa3' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 14px center;
+  }
+  select:focus { outline:none; border-color:#7b8cff; }
+  button {
+    width:100%; margin-top:24px; padding:15px; font-size:16px; font-weight:600;
+    color:#fff; border:none; border-radius:10px; cursor:pointer;
+    background: linear-gradient(135deg,#6a7bff,#9b6bff);
+    box-shadow:0 4px 14px rgba(120,110,255,.35);
+    transition: transform .1s;
+  }
+  button:active { transform: scale(.98); }
+  #report {
+    margin-top:24px; display:none;
+    animation: fade .35s ease;
+  }
+  @keyframes fade { from{opacity:0; transform:translateY(8px);} to{opacity:1;} }
+  .report-inner {
+    background: linear-gradient(160deg,#f0f5ff,#f7f0ff);
+    border:1px solid #e3e8ff; border-radius:14px; padding:20px;
+  }
+  .badge {
+    display:inline-block; font-size:12px; padding:3px 10px; border-radius:20px;
+    background:#e4e9ff; color:#5a63c9; margin-bottom:10px;
+  }
+  .report-inner h3 { margin:6px 0 14px; font-size:17px; color:#2b2b4a; }
+  .section { margin-bottom:14px; }
+  .section .t { font-size:12px; color:#8a8aa3; margin-bottom:4px; letter-spacing:.5px;}
+  .section .c { font-size:15px; color:#33334d; line-height:1.6; }
+  .action {
+    background:#fff; border-radius:10px; padding:14px;
+    border-left:4px solid #7b8cff; font-size:15px; color:#2b2b4a; line-height:1.6;
+  }
+  .empty-tip { text-align:center; color:#b0b0c5; font-size:13px; margin-top:16px;}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>解锁你的成长密码</h1>
+  <div class="sub">选两个维度，找到属于你的成长组合</div>
+
+  <label>你想探索哪种成长方向？</label>
+  <select id="selWhere">
+    <option value="">请选择成长方向</option>
+    <option value="换个领域">换个领域：打开新地图</option>
+    <option value="换个坐标">换个坐标：解锁新视野</option>
+    <option value="带领他人">带领他人：升级影响力</option>
+    <option value="带领项目">带领项目：挑战新副本</option>
+  </select>
+
+  <label>你更喜欢怎样成长？</label>
+  <select id="selHow">
+    <option value="">请选择学习方式</option>
+    <option value="做中学">行动中学</option>
+    <option value="项目中学">项目中学</option>
+    <option value="反馈中学">反馈中学</option>
+    <option value="向他人学">向他人学</option>
+    <option value="系统学习">系统学习</option>
+    <option value="AI助学">AI助学</option>
+  </select>
+
+  <button id="btn">解锁你的成长密码</button>
+
+  <div id="report"></div>
+</div>
+
+<script>
+/* 数据：key = 方向|方式 */
+const DATA = {
+  "换个领域|做中学":   { insight:"想了解一个新领域？最好的方式不是看攻略，而是直接进入现场。", action:"找一个感兴趣的领域，主动参与一次相关任务或活动。" },
+  "换个领域|项目中学": { insight:"项目是跨领域的快速通道，一次合作可能打开一张新地图。", action:"找一个跨领域项目，主动申请成为“新手玩家”。" },
+  "换个领域|反馈中学": { insight:"进入新领域，也是在发现自己的隐藏技能。", action:"问一位不同领域同事：“你觉得我的能力还能用在哪里？”" },
+  "换个领域|向他人学": { insight:"最快了解一个领域的方法：找到走过这条路的人。", action:"约一位领域达人聊30分钟，获取3个入门建议。" },
+  "换个领域|系统学习": { insight:"先搭知识地图，再开始探索旅程。", action:"选择一个新领域，完成一次1小时快速学习。" },
+  "换个领域|AI助学":   { insight:"不懂的新领域，可以先让AI帮你快速破冰。", action:"让AI生成一份“XX领域新手指南”。" },
+
+  "换个坐标|做中学":   { insight:"换个环境，往往会看到不一样的问题和答案。", action:"主动参加一次跨区域/跨文化合作。" },
+  "换个坐标|项目中学": { insight:"不同背景的人一起做事，就是最好的视野训练场。", action:"加入一个跨团队或跨地区项目。" },
+  "换个坐标|反馈中学": { insight:"别人的视角，可能帮你发现新的可能。", action:"向一位不同背景同事问：“你怎么看这件事？”" },
+  "换个坐标|向他人学": { insight:"世界很大，先从认识不同的人开始。", action:"找一位不同团队/地区同事，聊聊TA的工作方式。" },
+  "换个坐标|系统学习": { insight:"扩大视野，需要新的知识输入。", action:"学习一个关于市场、文化或行业的新主题。" },
+  "换个坐标|AI助学":   { insight:"不一定马上出发，也可以先用AI打开一扇窗。", action:"让AI帮你比较两个市场或地区的差异。" },
+
+  "带领他人|做中学":   { insight:"领导力不是等职位到了才开始，而是在影响别人时发生。", action:"主动帮助一位同事解决一个问题。" },
+  "带领他人|项目中学": { insight:"项目是练习影响力的最佳训练场。", action:"在项目中主动承担协调、推动或连接角色。" },
+  "带领他人|反馈中学": { insight:"优秀领导者不仅给反馈，也善于接收反馈。", action:"问伙伴：“我怎样支持你会更有效？”" },
+  "带领他人|向他人学": { insight:"每个优秀领导者，都藏着值得学习的一招。", action:"观察一位欣赏的领导者，学习TA一个行为。" },
+  "带领他人|系统学习": { insight:"影响力需要热情，也需要方法。", action:"学习一个领导工具，并马上实践一次。" },
+  "带领他人|AI助学":   { insight:"未来领导者，也需要学会与AI协作。", action:"让AI帮你准备一次沟通、反馈或团队讨论。" },
+
+  "带领项目|做中学":   { insight:"很多能力不是准备好了才开始，而是开始后才学会。", action:"主动承担一个过去没负责过的小任务。" },
+  "带领项目|项目中学": { insight:"真正的能力升级，发生在解决真实问题的时候。", action:"寻找一个“有点难但够得着”的项目机会。" },
+  "带领项目|反馈中学": { insight:"高手不是一次通关，而是不断优化打法。", action:"在项目关键节点主动收集一次反馈。" },
+  "带领项目|向他人学": { insight:"困难副本，不一定要单打独斗。", action:"找一位有经验的人，请TA分享一个避坑经验。" },
+  "带领项目|系统学习": { insight:"新挑战，需要新的工具和技能。", action:"提前补充一个项目需要的关键能力。" },
+  "带领项目|AI助学":   { insight:"面对未知任务，AI可以成为你的战略伙伴。", action:"让AI帮你拆解目标、风险和下一步行动。" }
+};
+
+const selWhere = document.getElementById('selWhere');
+const selHow   = document.getElementById('selHow');
+const btn      = document.getElementById('btn');
+const report   = document.getElementById('report');
+
+btn.addEventListener('click', () => {
+  const w = selWhere.value, h = selHow.value;
+  if (!w || !h) {
+    report.style.display = 'block';
+    report.innerHTML = '<p class="empty-tip">请先选择成长方向和学习方式哦～</p>';
+    return;
+  }
+  const d = DATA[w + '|' + h];
+  if (!d) {
+    report.innerHTML = '<p class="empty-tip">暂无该组合的报告。</p>';
+    report.style.display = 'block';
+    return;
+  }
+  report.innerHTML = `
+    <div class="report-inner">
+      <span class="badge">${w} · ${h}</span>
+      <h3>你的成长组合</h3>
+      <div class="section">
+        <div class="t">GROWTH INSIGHT</div>
+        <div class="c">${d.insight}</div>
+      </div>
+      <div class="section">
+        <div class="t">TRY THIS · 马上行动</div>
+        <div class="action">${d.action}</div>
+      </div>
+    </div>`;
+  report.style.display = 'block';
+  report.scrollIntoView({ behavior:'smooth', block:'nearest' });
+});
+</script>
+</body>
+</html>

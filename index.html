@@ -3,135 +3,438 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>解锁你的成长密码</title>
+<title>解锁你的成长密码 · Culture Week 2026</title>
 <style>
   * { box-sizing: border-box; }
   body {
     font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-    margin: 0; padding: 24px 16px;
-    background: linear-gradient(160deg, #eef4ff 0%, #f7f0ff 100%);
+    margin: 0; padding: 0 0 40px;
+    background: #ffffff;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
+
+  /* ===== 顶部 Culture Week 标题条（更窄） ===== */
+  .cw-banner {
+    width: 100%;
+    background: linear-gradient(120deg, #F7941E 0%, #F15A29 28%, #E6007E 60%, #6B3FA0 85%, #2E3192 100%);
+    padding: 16px 22px 22px;          /* ✅ 更窄 */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 6px 20px rgba(120, 40, 120, .16);
+  }
+  .cw-banner::before,
+  .cw-banner::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    opacity: .22;
+    background: #fff;
+  }
+  .cw-banner::before { width: 140px; height: 140px; top: -55px; left: -40px; }
+  .cw-banner::after  { width: 110px; height: 110px; bottom: -60px; right: -25px; opacity:.18; }
+
+  /* ✅ B/S/H/ 放大 2 个号，右上角，紧凑 */
+  .cw-brand {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    z-index: 3;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1;
+    opacity: .95;
+  }
+
+  /* ✅ Culture Week 2026：大 + 粗 + 增加透明感 */
+  .cw-title {
+    position: relative; z-index: 2;
+    color: rgba(255, 255, 255, .82);   /* 增加透明感 */
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    line-height: 1.2;
+    margin: 14px 0 0;
+    text-shadow: none;
+  }
+
+  .cw-sub {
+    position: relative; z-index: 2;
+    color: rgba(255, 255, 255, .92);
+    font-size: 14px;
+    margin-top: 8px;
+    letter-spacing: .5px;
+    line-height: 1.5;
+  }
+  .cw-sub .en { display: block; }
+  .cw-sub .zh { display: block; margin-top: 2px; }
+
+  /* ===== 卡片 ===== */
   .card {
-    background: #fff; border-radius: 16px; padding: 24px 20px;
-    max-width: 480px; margin: 0 auto;
-    box-shadow: 0 6px 24px rgba(80, 100, 180, .12);
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 26px 20px 28px;
+    max-width: 520px;
+    margin: -14px auto 0;
+    position: relative; z-index: 2;
+    box-shadow: 0 10px 40px rgba(60, 20, 80, .12);
   }
-  h1 { font-size: 20px; text-align: center; margin: 0 0 4px; color:#2b2b4a;}
-  .sub { text-align:center; color:#8a8aa3; font-size:13px; margin-bottom:24px;}
-  label { display:block; margin:16px 0 8px; font-weight:600; font-size:14px; color:#3a3a5c;}
-  select {
-    width:100%; padding:13px 12px; font-size:15px;
-    border:1.5px solid #dfe3f0; border-radius:10px;
-    background:#fbfcff; color:#2b2b4a; appearance:none;
-    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238a8aa3' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
-    background-repeat:no-repeat; background-position:right 14px center;
+  .card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(90deg, #F7941E, #F15A29, #E6007E, #6B3FA0, #2E3192);
   }
-  select:focus { outline:none; border-color:#7b8cff; }
-  button {
-    width:100%; margin-top:24px; padding:15px; font-size:16px; font-weight:600;
-    color:#fff; border:none; border-radius:10px; cursor:pointer;
-    background: linear-gradient(135deg,#6a7bff,#9b6bff);
-    box-shadow:0 4px 14px rgba(120,110,255,.35);
-    transition: transform .1s;
+
+  h1.card-title {
+    font-size: 24px; text-align: center; margin: 8px 0 8px;
+    font-weight: 900; letter-spacing: .5px;
+    background: linear-gradient(90deg, #F7941E 0%, #F15A29 30%, #E6007E 65%, #6B3FA0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #E6007E;
   }
-  button:active { transform: scale(.98); }
-  #report {
-    margin-top:24px; display:none;
-    animation: fade .35s ease;
+  .sub {
+    text-align: center;
+    font-size: 13px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+    font-weight: 700;
+    background: linear-gradient(90deg, #F15A29 0%, #E6007E 50%, #6B3FA0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #E6007E;
   }
-  @keyframes fade { from{opacity:0; transform:translateY(8px);} to{opacity:1;} }
+
+  /* ===== 贴纸区 ===== */
+  .stickers-wrap {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  .stickers-wrap::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 6%;
+    height: 88%;
+    border-left: 1.5px dashed #c9d8ea;
+    transform: translateX(-50%);
+  }
+
+  .sticker { position: relative; padding-top: 16px; }
+
+  .sticker-tag {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    background: #cfe0f0;
+    color: #2E3192;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(80, 120, 170, .2);
+    z-index: 3;
+  }
+  .sticker:nth-child(2) .sticker-tag {
+    transform: translateX(-50%) rotate(3deg);
+    background: #d8e6f5;
+  }
+
+  .sticker-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eaf1f9;
+    border: 2px dashed #9db8d4;
+    border-radius: 14px;
+    padding: 20px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .25s ease;
+    min-height: 130px;
+  }
+  .sticker-box:hover { border-color: #6B3FA0; background: #f4f0ff; }
+
+  .sticker.selected .sticker-box {
+    border-style: solid;
+    border-color: #E6007E;
+    background: linear-gradient(160deg, #fff5fa, #f2efff);
+    box-shadow: 0 6px 18px rgba(230, 0, 126, .18);
+  }
+
+  .sticker-text {
+    font-size: 13px;
+    color: #8fa9c4;
+    letter-spacing: .5px;
+    line-height: 1.5;
+    padding: 0 6px;
+  }
+  .sticker.selected .sticker-text {
+    color: #E6007E;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .sticker-box select {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  /* ===== 按钮 ===== */
+  button#btn {
+    width: 100%; margin-top: 22px; padding: 16px;
+    font-size: 16px; font-weight: 800; letter-spacing: .5px;
+    color: #fff; border: none; border-radius: 12px; cursor: pointer;
+    background: linear-gradient(135deg, #F7941E 0%, #F15A29 35%, #E6007E 75%, #6B3FA0 100%);
+    box-shadow: 0 6px 20px rgba(230, 0, 126, .35);
+    transition: transform .1s, box-shadow .2s;
+  }
+  button#btn:active { transform: scale(.98); box-shadow: 0 3px 12px rgba(230, 0, 126, .3); }
+
+  /* ===== 结果区 ===== */
+  #report { margin-top: 22px; display: none; animation: fade .35s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; } }
   .report-inner {
-    background: linear-gradient(160deg,#f0f5ff,#f7f0ff);
-    border:1px solid #e3e8ff; border-radius:14px; padding:20px;
+    background: linear-gradient(160deg, #fff6f9 0%, #f6f0ff 100%);
+    border: 1px solid #f3dcea;
+    border-radius: 16px; padding: 20px;
   }
   .badge {
-    display:inline-block; font-size:12px; padding:3px 10px; border-radius:20px;
-    background:#e4e9ff; color:#5a63c9; margin-bottom:10px;
+    display: inline-block; font-size: 12px; font-weight: 700;
+    padding: 4px 12px; border-radius: 20px;
+    background: linear-gradient(135deg, #F7941E, #E6007E);
+    color: #fff; margin-bottom: 12px;
   }
-  .report-inner h3 { margin:6px 0 14px; font-size:17px; color:#2b2b4a; }
-  .section { margin-bottom:14px; }
-  .section .t { font-size:12px; color:#8a8aa3; margin-bottom:4px; letter-spacing:.5px;}
-  .section .c { font-size:15px; color:#33334d; line-height:1.6; }
+  .report-inner h3 { margin: 6px 0 16px; font-size: 17px; color: #2E3192; font-weight: 800; }
+  .section { margin-bottom: 16px; }
+  .section .t { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #E6007E; margin-bottom: 6px; }
+  .section .c { font-size: 15px; color: #33334d; line-height: 1.7; }
   .action {
-    background:#fff; border-radius:10px; padding:14px;
-    border-left:4px solid #7b8cff; font-size:15px; color:#2b2b4a; line-height:1.6;
+    background: #fff; border-radius: 12px; padding: 15px;
+    border-left: 4px solid #F15A29;
+    font-size: 15px; color: #2b2b4a; line-height: 1.7;
+    box-shadow: 0 2px 10px rgba(241, 90, 41, .08);
   }
-  .empty-tip { text-align:center; color:#b0b0c5; font-size:13px; margin-top:16px;}
+
+  .disclaimer {
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px dashed #e3d5e8;
+    text-align: center; font-size: 12.5px;
+    color: #9a8fa8; line-height: 1.6;
+  }
+  .disclaimer strong { color: #E6007E; font-weight: 700; }
+
+  .empty-tip { text-align: center; color: #b0a0b8; font-size: 13px; margin-top: 16px; }
 </style>
 </head>
 <body>
-<div class="card">
-  <h1>解锁你的成长密码</h1>
-  <div class="sub">选两个维度，找到属于你的成长组合</div>
 
-  <label>你想探索哪种成长方向？</label>
-  <select id="selWhere">
-    <option value="">请选择成长方向</option>
-    <option value="换个领域">换个领域：打开新地图</option>
-    <option value="换个坐标">换个坐标：解锁新视野</option>
-    <option value="带领他人">带领他人：升级影响力</option>
-    <option value="带领项目">带领项目：挑战新副本</option>
-  </select>
+  <!-- ===== 顶部 Culture Week 标题条 ===== -->
+  <div class="cw-banner">
+    <div class="cw-brand">B/S/H/</div>
+    <div class="cw-title">Culture Week 2026</div>
+    <div class="cw-sub">
+      <span class="en">We Make it Happen · Together.</span>
+      <span class="zh">一起 · 成就可能</span>
+    </div>
+  </div>
 
-  <label>你更喜欢怎样成长？</label>
-  <select id="selHow">
-    <option value="">请选择学习方式</option>
-    <option value="做中学">行动中学</option>
-    <option value="项目中学">项目中学</option>
-    <option value="反馈中学">反馈中学</option>
-    <option value="向他人学">向他人学</option>
-    <option value="系统学习">系统学习</option>
-    <option value="AI助学">AI助学</option>
-  </select>
+  <!-- ===== 卡片 ===== -->
+  <div class="card">
+    <h1 class="card-title">解锁你的成长密码</h1>
+    <div class="sub">选两个维度，找到属于你的成长组合</div>
 
-  <button id="btn">解锁你的成长密码</button>
+    <!-- 贴纸选择区 -->
+    <div class="stickers-wrap">
 
-  <div id="report"></div>
-</div>
+      <div class="sticker" id="sticker1">
+        <div class="sticker-tag">贴纸 1：探索你的方向</div>
+        <div class="sticker-box">
+          <div class="sticker-text" id="text1">点击选择探索方向</div>
+          <select id="selWhere">
+            <option value="">请选择探索方向</option>
+            <option value="换个领域">换个领域：打开新地图</option>
+            <option value="换个坐标">换个坐标：解锁新视野</option>
+            <option value="带领他人">带领他人：升级影响力</option>
+            <option value="带领项目">带领项目：挑战新副本</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="sticker" id="sticker2">
+        <div class="sticker-tag">贴纸 2：选择你的方式</div>
+        <div class="sticker-box">
+          <div class="sticker-text" id="text2">点击选择成长方式</div>
+          <select id="selHow">
+            <option value="">请选择成长方式</option>
+            <option value="参与关键商业决策">参与关键商业决策</option>
+            <option value="参与/带领创新与数字化项目">参与/带领创新与数字化项目</option>
+            <option value="参与跨部门/外部战略合作">参与跨部门/外部战略合作</option>
+            <option value="组建/带领跨团队项目">组建/带领跨团队项目</option>
+            <option value="内部分享、辅导与带教">内部分享、辅导与带教</option>
+            <option value="参与行业论坛与专家交流">参与行业论坛与专家交流</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <button id="btn">解锁你的成长密码</button>
+
+    <div id="report"></div>
+
+    <div class="disclaimer">
+      趣味匹配，仅供参考；<strong>你的下一步，由你定义。</strong>
+    </div>
+  </div>
 
 <script>
-/* 数据：key = 方向|方式 */
 const DATA = {
-  "换个领域|做中学":   { insight:"想了解一个新领域？最好的方式不是看攻略，而是直接进入现场。", action:"找一个感兴趣的领域，主动参与一次相关任务或活动。" },
-  "换个领域|项目中学": { insight:"项目是跨领域的快速通道，一次合作可能打开一张新地图。", action:"找一个跨领域项目，主动申请成为“新手玩家”。" },
-  "换个领域|反馈中学": { insight:"进入新领域，也是在发现自己的隐藏技能。", action:"问一位不同领域同事：“你觉得我的能力还能用在哪里？”" },
-  "换个领域|向他人学": { insight:"最快了解一个领域的方法：找到走过这条路的人。", action:"约一位领域达人聊30分钟，获取3个入门建议。" },
-  "换个领域|系统学习": { insight:"先搭知识地图，再开始探索旅程。", action:"选择一个新领域，完成一次1小时快速学习。" },
-  "换个领域|AI助学":   { insight:"不懂的新领域，可以先让AI帮你快速破冰。", action:"让AI生成一份“XX领域新手指南”。" },
+  /* ===== 换个领域 · 打开新地图 ===== */
+  "换个领域|参与关键商业决策": {
+    insight: "想了解一个新领域？先看看这个领域的人是如何做判断和取舍的。",
+    action:  "找一个感兴趣的领域，主动旁听一次业务决策或评审会议。"
+  },
+  "换个领域|参与/带领创新与数字化项目": {
+    insight: "新领域不一定从课程开始，参与一个真实项目，往往是最快的入门方式。",
+    action:  "找一个感兴趣的创新或数字化项目，主动申请参与。"
+  },
+  "换个领域|参与跨部门/外部战略合作": {
+    insight: "跨出熟悉的边界，才能发现原来不同领域可以这样连接。",
+    action:  "找一个跨部门或外部合作机会，主动贡献一次自己的专业能力。"
+  },
+  "换个领域|组建/带领跨团队项目": {
+    insight: "进入一个新领域，也可以从“连接不同的人”开始。",
+    action:  "找一个跨团队项目，主动承担协调或推动角色。"
+  },
+  "换个领域|内部分享、辅导与带教": {
+    insight: "教别人，也是重新认识一个领域、发现自己优势的过程。",
+    action:  "找一个自己擅长的领域，给另一团队同事做一次30分钟分享。"
+  },
+  "换个领域|参与行业论坛与专家交流": {
+    insight: "想快速了解一个陌生领域？先听听行业里的人怎么说。",
+    action:  "参加一次行业论坛或专家交流，并记录3个新发现。"
+  },
 
-  "换个坐标|做中学":   { insight:"换个环境，往往会看到不一样的问题和答案。", action:"主动参加一次跨区域/跨文化合作。" },
-  "换个坐标|项目中学": { insight:"不同背景的人一起做事，就是最好的视野训练场。", action:"加入一个跨团队或跨地区项目。" },
-  "换个坐标|反馈中学": { insight:"别人的视角，可能帮你发现新的可能。", action:"向一位不同背景同事问：“你怎么看这件事？”" },
-  "换个坐标|向他人学": { insight:"世界很大，先从认识不同的人开始。", action:"找一位不同团队/地区同事，聊聊TA的工作方式。" },
-  "换个坐标|系统学习": { insight:"扩大视野，需要新的知识输入。", action:"学习一个关于市场、文化或行业的新主题。" },
-  "换个坐标|AI助学":   { insight:"不一定马上出发，也可以先用AI打开一扇窗。", action:"让AI帮你比较两个市场或地区的差异。" },
+  /* ===== 换个坐标 · 解锁新视野 ===== */
+  "换个坐标|参与关键商业决策": {
+    insight: "换个市场、区域或文化背景，可能会看到完全不同的决策逻辑。",
+    action:  "主动参与一次跨区域业务讨论，问一个“为什么不一样？”的问题。"
+  },
+  "换个坐标|参与/带领创新与数字化项目": {
+    insight: "不同市场的创新实践，是打开新视野的快捷方式。",
+    action:  "加入一个跨区域创新/数字化项目，看看别人如何解决同一个问题。"
+  },
+  "换个坐标|参与跨部门/外部战略合作": {
+    insight: "与不同背景的人合作，是训练全球视野和开放思维的好机会。",
+    action:  "主动参与一次跨区域、跨文化或外部合作。"
+  },
+  "换个坐标|组建/带领跨团队项目": {
+    insight: "不同的人、不同的观点，往往能让一个项目看到更多可能。",
+    action:  "找一个跨团队或跨地区项目，主动承担一个连接角色。"
+  },
+  "换个坐标|内部分享、辅导与带教": {
+    insight: "分享自己的经验，也是在理解别人不同工作方式的过程。",
+    action:  "找一位不同地区/团队的同事，交换一次工作经验。"
+  },
+  "换个坐标|参与行业论坛与专家交流": {
+    insight: "世界很大，外部视角可以帮你重新看待熟悉的问题。",
+    action:  "参加一次行业论坛或专家交流，带回一个值得尝试的新想法。"
+  },
 
-  "带领他人|做中学":   { insight:"领导力不是等职位到了才开始，而是在影响别人时发生。", action:"主动帮助一位同事解决一个问题。" },
-  "带领他人|项目中学": { insight:"项目是练习影响力的最佳训练场。", action:"在项目中主动承担协调、推动或连接角色。" },
-  "带领他人|反馈中学": { insight:"优秀领导者不仅给反馈，也善于接收反馈。", action:"问伙伴：“我怎样支持你会更有效？”" },
-  "带领他人|向他人学": { insight:"每个优秀领导者，都藏着值得学习的一招。", action:"观察一位欣赏的领导者，学习TA一个行为。" },
-  "带领他人|系统学习": { insight:"影响力需要热情，也需要方法。", action:"学习一个领导工具，并马上实践一次。" },
-  "带领他人|AI助学":   { insight:"未来领导者，也需要学会与AI协作。", action:"让AI帮你准备一次沟通、反馈或团队讨论。" },
+  /* ===== 带领他人 · 升级影响力 ===== */
+  "带领他人|参与关键商业决策": {
+    insight: "影响力不只来自职位，也来自你能否提出有价值的判断。",
+    action:  "在一次业务讨论中，主动提出一个观点或建议。"
+  },
+  "带领他人|参与/带领创新与数字化项目": {
+    insight: "创新项目是练习影响、推动共识和带动改变的真实训练场。",
+    action:  "在一个项目中主动推动一个想法从“提议”走向“行动”。"
+  },
+  "带领他人|参与跨部门/外部战略合作": {
+    insight: "真正的影响力，是没有直接汇报关系时依然能推动事情发生。",
+    action:  "找一个需要跨部门协作的问题，主动发起一次沟通。"
+  },
+  "带领他人|组建/带领跨团队项目": {
+    insight: "领导力不是等职位到了才开始，而是在带动别人时发生。",
+    action:  "在项目中主动承担协调、推动或团队带领角色。"
+  },
+  "带领他人|内部分享、辅导与带教": {
+    insight: "帮助别人变得更好，也是提升自己影响力的方式。",
+    action:  "主动辅导一位同事，帮助TA解决一个真实工作问题。"
+  },
+  "带领他人|参与行业论坛与专家交流": {
+    insight: "向高手学习，不只是获得知识，更是观察他们如何思考和影响别人。",
+    action:  "找一位欣赏的专家或领导者，学习TA一个值得借鉴的行为。"
+  },
 
-  "带领项目|做中学":   { insight:"很多能力不是准备好了才开始，而是开始后才学会。", action:"主动承担一个过去没负责过的小任务。" },
-  "带领项目|项目中学": { insight:"真正的能力升级，发生在解决真实问题的时候。", action:"寻找一个“有点难但够得着”的项目机会。" },
-  "带领项目|反馈中学": { insight:"高手不是一次通关，而是不断优化打法。", action:"在项目关键节点主动收集一次反馈。" },
-  "带领项目|向他人学": { insight:"困难副本，不一定要单打独斗。", action:"找一位有经验的人，请TA分享一个避坑经验。" },
-  "带领项目|系统学习": { insight:"新挑战，需要新的工具和技能。", action:"提前补充一个项目需要的关键能力。" },
-  "带领项目|AI助学":   { insight:"面对未知任务，AI可以成为你的战略伙伴。", action:"让AI帮你拆解目标、风险和下一步行动。" }
+  /* ===== 带领项目 · 挑战新副本 ===== */
+  "带领项目|参与关键商业决策": {
+    insight: "项目越往前走，越需要从“完成任务”升级到“做出判断”。",
+    action:  "在项目中主动参与一次目标、资源或优先级讨论。"
+  },
+  "带领项目|参与/带领创新与数字化项目": {
+    insight: "真正的能力升级，往往发生在解决真实问题的时候。",
+    action:  "寻找一个“有点难但够得着”的创新或数字化项目。"
+  },
+  "带领项目|参与跨部门/外部战略合作": {
+    insight: "高难度项目很少靠一个团队完成，协作能力就是通关装备。",
+    action:  "主动加入一个跨部门项目，承担一个关键协作任务。"
+  },
+  "带领项目|组建/带领跨团队项目": {
+    insight: "从“完成自己的任务”到“带着大家一起完成”，是一次真正的升级。",
+    action:  "主动承担一个项目负责人或工作流负责人角色。"
+  },
+  "带领项目|内部分享、辅导与带教": {
+    insight: "项目做完不是终点，把经验沉淀下来，才能让成果被复制。",
+    action:  "把一次项目经验整理成一个Tips，与团队分享。"
+  },
+  "带领项目|参与行业论坛与专家交流": {
+    insight: "面对新挑战，不一定要自己摸索，外部经验可以帮你少走弯路。",
+    action:  "找一次行业交流机会，带回一个可以应用到项目中的做法。"
+  }
 };
 
-const selWhere = document.getElementById('selWhere');
-const selHow   = document.getElementById('selHow');
-const btn      = document.getElementById('btn');
-const report   = document.getElementById('report');
+const selWhere  = document.getElementById('selWhere');
+const selHow    = document.getElementById('selHow');
+const text1     = document.getElementById('text1');
+const text2     = document.getElementById('text2');
+const sticker1  = document.getElementById('sticker1');
+const sticker2  = document.getElementById('sticker2');
+const btn       = document.getElementById('btn');
+const report    = document.getElementById('report');
+
+function syncSticker(select, sticker, textEl, placeholder) {
+  if (select.value) {
+    sticker.classList.add('selected');
+    textEl.textContent = select.value;
+  } else {
+    sticker.classList.remove('selected');
+    textEl.textContent = placeholder;
+  }
+}
+
+selWhere.addEventListener('change', () => syncSticker(selWhere, sticker1, text1, '点击选择探索方向'));
+selHow  .addEventListener('change', () => syncSticker(selHow,   sticker2, text2, '点击选择成长方式'));
 
 btn.addEventListener('click', () => {
   const w = selWhere.value, h = selHow.value;
   if (!w || !h) {
     report.style.display = 'block';
-    report.innerHTML = '<p class="empty-tip">请先选择成长方向和学习方式哦～</p>';
+    report.innerHTML = '<p class="empty-tip">请先贴上两张贴纸哦～</p>';
     return;
   }
   const d = DATA[w + '|' + h];
